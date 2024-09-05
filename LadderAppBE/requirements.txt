@@ -1,0 +1,10 @@
+Flask==2.3.3
+Flask-Bcrypt
+bcrypt
+Flask-Session
+Flask-Cors
+python-dotenv
+redis
+Flask-SQLAlchemy
+PyMySQL
+cryptography
