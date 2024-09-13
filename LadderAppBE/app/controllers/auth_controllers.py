@@ -5,6 +5,9 @@ from app import bcrypt
 def register_user_controller(request):
     email = request.json["email"]
     password = request.json["password"]
+    firstName = request.json["firstName"]
+    lastName = request.json["lastName"]
+
 
     user_exists = User.query.filter_by(email=email).first() is not None
 
@@ -12,7 +15,7 @@ def register_user_controller(request):
         return jsonify({"error": "User already exists"}), 409
 
     hashed_password = bcrypt.generate_password_hash(password)
-    new_user = User(email=email, password=hashed_password)
+    new_user = User(email=email, password=hashed_password, firstName=firstName, lastName=lastName)
     db.session.add(new_user)
     db.session.commit()
 
