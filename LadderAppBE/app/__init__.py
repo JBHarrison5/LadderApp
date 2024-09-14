@@ -29,10 +29,11 @@ def create_app():
     app.add_url_rule('/@me', view_func=get_current_user, methods=['GET'])
 
     #rank routes
-    from app.routes.rank_routes import add_initial_rank
+    from app.routes.rank_routes import add_initial_rank, get_ranks
 
     app.add_url_rule('/add_initial_rank', view_func=add_initial_rank, methods=['POST'])
-
+    app.add_url_rule('/ranks', view_func=get_ranks, methods=['GET'])
+    
     with app.app_context():
         db.create_all()
 

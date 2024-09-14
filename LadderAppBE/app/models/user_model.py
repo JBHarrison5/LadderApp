@@ -13,3 +13,4 @@ class User(db.Model):
     firstName = db.Column(db.String(345), nullable=False)
     lastName = db.Column(db.String(345), nullable=False)
     program = db.Column(db.String(255), nullable=False, default="client")
+    ranks = db.relationship('Rank', backref='user')

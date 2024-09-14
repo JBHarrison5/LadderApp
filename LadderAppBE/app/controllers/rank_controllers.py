@@ -53,3 +53,17 @@ def swap_ranks(player_1, player_2):
     except Exception:
         db.session.rollback()
         print(f"An error occurred: {Exception}")
+
+
+def get_ranks_controller():
+    ranks = [] 
+
+    for rank in Rank.query.filter_by(is_current_rank=True).order_by(Rank.rank):
+        person = {
+            "player" : rank.user.firstName,
+            "rank": rank.rank
+        }
+        ranks.append(person)
+
+    return jsonify(ranks)
+        

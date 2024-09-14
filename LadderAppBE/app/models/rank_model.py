@@ -12,6 +12,6 @@ class Rank(db.Model):
     id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid)
     rank = db.Column(db.Integer, nullable=False)
     player_id = db.Column(db.String(32), db.ForeignKey('users.id'), nullable=False)
-    is_current_rank = db.Column(db.Boolean, nullable=False, default=1)
+    is_current_rank = db.Column(db.Boolean, nullable=False, default=True)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     date_changed = db.Column(db.DateTime)
