@@ -20,11 +20,11 @@ const LandingPage = () => {
         })()
     }, [])
     return (
-        <div>
-            <h1>Welcome to react app</h1>
+        <div className='d-flex flex-column justify-content-center'>
+            <img className="rounded-circle" src="./assets/ormeauTT.png" />
 
             {/* ternery that presents a different screen depending on whether user is logged
-            needs tidied */}
+            needs tidied. Do you need this */}
             {user != "" ? (
                 <>
                     <h1>Logged In</h1>
@@ -33,15 +33,16 @@ const LandingPage = () => {
                 </>
 
             ) : (
-                <div>
-                    <p>Your are not logged in</p>
-                    <a href="/login">
-                        <button>Log In</button>
+                <div className='my-5 d-flex flex-column justify-content-center'>
+                    <a href="/register" className='text-center'>
+                        <button className='fs-2 px-5 py-2 fw-bold'>REGISTER</button>
                     </a>
-                    <br/>
-                    <a href='/register'>
-                        <button>Register</button>
-                    </a>
+                    <div className='my-5 d-flex flex-column'>
+                        <p className='text-center fs-5 ormeau-pink'>Already Have An Account?</p>
+                        <a className="text-center ormeau-pink fs-4" href='/login'>
+                            <button className='fs-6 px-2 py-2'>LOG IN</button>
+                        </a>
+                    </div>
                 </div>
             )}
         </div>
