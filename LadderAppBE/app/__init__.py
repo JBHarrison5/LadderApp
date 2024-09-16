@@ -5,6 +5,8 @@ from flask_cors import CORS
 from config import ApplicationConfig
 from app.models import Rank
 from app.models import User
+from flask_migrate import Migrate
+
 
 bcrypt = Bcrypt()
 server_session = Session()
@@ -15,7 +17,8 @@ def create_app():
 
     from app.models import db
     db.init_app(app)
-    
+    migrate = Migrate(app, db)
+
     bcrypt = Bcrypt(app)
     CORS(app, supports_credentials=True)
     server_session = Session(app)
@@ -34,6 +37,11 @@ def create_app():
     app.add_url_rule('/add_initial_rank', view_func=add_initial_rank, methods=['POST'])
     app.add_url_rule('/ranks', view_func=get_ranks, methods=['GET'])
     
+    #match routes
+    from app.routes.match_routes import add_match
+
+    app.add_url_rule('/add_match', view_func=add_match, methods=['POST'])
+
     with app.app_context():
         db.create_all()
 

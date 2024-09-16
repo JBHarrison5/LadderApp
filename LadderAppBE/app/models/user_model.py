@@ -1,9 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from uuid import uuid4
 from app.models import db
-
-def get_uuid():
-    return uuid4().hex
+from app.models.helpers import get_uuid
 
 class User(db.Model):
     __tablename__ = "users"
@@ -14,3 +12,6 @@ class User(db.Model):
     lastName = db.Column(db.String(345), nullable=False)
     program = db.Column(db.String(255), nullable=False, default="client")
     ranks = db.relationship('Rank', backref='user')
+    matches_as_player_1 = db.relationship('Match', foreign_keys="Match.player_1_id", backref='player_1')
+    matches_as_player_1 = db.relationship('Match', foreign_keys="Match.player_2_id", backref='player_2')
+    matches_as_winner = db.relationship('Match', foreign_keys="Match.winner_id", backref='winner')

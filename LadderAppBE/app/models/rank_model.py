@@ -2,10 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 from uuid import uuid4
 from datetime import datetime
 from app.models import db
+from app.models.helpers import get_uuid
 
-
-def get_uuid():
-    return uuid4().hex
 
 class Rank(db.Model):
     __tablename__ = "ranks"
