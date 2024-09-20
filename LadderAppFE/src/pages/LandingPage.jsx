@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react'
 import httpClient from "../httpClient"
 import LoggedInUser from '../components/LoggedInUserComponent'
 import AuthenicationComponent from '../components/AuthenicationComponent'
+import LogoAtom from '../atoms/LogoAtom'
 
 const LandingPage = () => {
     const [user, setUser] = useState("")
@@ -24,8 +25,7 @@ const LandingPage = () => {
 
     return (
         <div className='d-flex flex-column justify-content-center align-items-center'>
-            <img className="rounded-circle large-logo" src="./assets/ormeauTT.png" />
-
+            <LogoAtom />
             {user ? (
                 // probably change to a home page redirect
                 <LoggedInUser user={user} onLogout={logoutUser} />

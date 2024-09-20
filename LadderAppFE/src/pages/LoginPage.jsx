@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import httpClient from '../httpClient'
 import FallbackAuthenticationMolecule from '../molecules/FallbackAuthenticationMolecule';
+import LogoAtom from '../atoms/LogoAtom';
+import ButtonAtom from '../atoms/ButtonAtom';
+import FormInputAtom from '../atoms/FormInputAtom';
+import ErrorAtom from '../atoms/ErrorAtom';
 
 const LoginPage = () => {
     const { register, handleSubmit } = useForm();
-
+    const [serverError, setServerError] = useState();
     const logInUser = async(formData) => {
-
+        setServerError("")
         try {
             const resp = await httpClient.post("//localhost:5000/login", formData)
 
@@ -15,7 +19,7 @@ const LoginPage = () => {
         }
         catch (error) {
             if (error.response.status === 401) {
-                alert("Invalid Credentials")
+                setServerError("Incorrect email or password")
             }
             else {
                 console.error(error)
@@ -26,23 +30,16 @@ const LoginPage = () => {
   return (
     <>
         <div className='d-flex flex-column justify-content-center align-items-center'>
-            <img className="rounded-circle large-logo" src="./assets/ormeauTT.png" />
+            <LogoAtom />
             <form onSubmit={handleSubmit(logInUser)} className='d-flex flex-column'>
                 <div className='my-5 d-flex space-between form-group flex-column justify-content-center gap-2'>
-                    <input 
-                        id="email" 
-                        {...register("email")} 
-                        placeholder='Email'
-                        className='text-center fs-6 form-control text-primary'
-                    />
-                    <input 
-                    id="password" 
-                    {...register("password")} 
-                    placeholder='Password' 
-                    className='text-center fs-6 form-control text-primary'
-                    />
+                    <FormInputAtom id="email" formMethod={register} placeholder="Email" />
+                    <FormInputAtom id="password" formMethod={register} placeholder="Password" />
                 </div>
-                <input type="submit" value="LOG IN" className='btn btn-primary text-white fs-2 fw-bold'/>
+                <div className='d-flex flex-column justify-content-center gap-2'>
+                    {serverError && <ErrorAtom message={serverError} />}
+                    <ButtonAtom text="log in" size="large" />
+                </div>
             </form>
             <FallbackAuthenticationMolecule page="login"/>
         </div>

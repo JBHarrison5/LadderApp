@@ -1,4 +1,5 @@
 import React from "react";
+import ButtonAtom from "../atoms/ButtonAtom";
 
 const FallbackAuthenticationMolecule = ( { page }) => {
     
@@ -21,7 +22,7 @@ const FallbackAuthenticationMolecule = ( { page }) => {
             <div className='my-5 d-flex flex-column'>
                 <p className='text-center fs-5 ormeau-pink'>{message}</p>
                 <a className="text-center ormeau-pink fs-4" href={link}>
-                    <button className='btn btn-primary text-white fw-bold'>{button}</button>
+                    <ButtonAtom text={button} />
                 </a>
             </div>
         </>
