@@ -1,4 +1,8 @@
+$primary: #ff2254;
+
 @import "bootstrap/scss/bootstrap";
+
+
 
 .app-background {
     background-image: linear-gradient(#000000, #8e8e8e);
@@ -15,4 +19,20 @@ button {
 
 .ormeau-pink {
     color: #ff2254;
+}
+
+.large-logo {
+    width: 60%;
+    height: 60%;
+}
+
+.form-control {
+    background: transparent;
+    border-color: $primary
+}
+
+.form-control::placeholder {
+    color: $primary;
+    opacity: 0.6;
+    background: transparent;
 }
