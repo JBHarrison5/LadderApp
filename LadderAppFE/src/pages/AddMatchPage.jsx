@@ -8,12 +8,14 @@ import NavBarComponent from '../components/NavBarComponent';
 import DatePicker from 'react-datepicker'
 import { format } from 'date-fns' 
 import { useRanks } from '../context/RanksContext';
+import { useUser } from '../context/UserContext';
+
 import "react-datepicker/dist/react-datepicker.css"
 
 const AddMatchPage = () => {
   const { control, register, handleSubmit, formState: { errors } } = useForm();
   const [serverError, setServerError] = useState("");
-  const [user, setUser] = useState("")
+  const { user, loading } = useUser();
   const { ranks } = useRanks();
 
   const addMatch = async(formData) => {
@@ -28,18 +30,16 @@ const AddMatchPage = () => {
     catch (error) {
           console.error(error)
       }
+  
   }
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const resp = await httpClient.get("//localhost:5000/@me");
-        setUser(resp.data)
-      } catch (error) {
-          console.log(error)
-      }
-    })()
-  }, [])
+  if(loading) {
+    return <p>Loading...</p>
+  }
+
+  if (!user) {
+    return <p>"user not logged in</p>
+  }
 
   return (
     <>

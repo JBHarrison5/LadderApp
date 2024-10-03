@@ -6,24 +6,15 @@ import NavBarComponent from '../components/NavBarComponent'
 import RankTableMolecule from '../molecules/RankTableMolecule';
 import InformationModalMolecule from '../molecules/InformationModalMolecule';
 import { useRanks } from '../context/RanksContext'
+import { useUser } from '../context/UserContext';
 
 const HomePage = () => {
 
-    const [user, setUser] = useState("")
+    const { user, loading } = useUser()
     const { ranks } = useRanks();
-    
-    //get user info
-    useEffect(() => {
-        (async () => {
-            try {
-                const resp = await httpClient.get("//localhost:5000/@me");
-                setUser(resp.data)
-            } catch (error) {
-                console.log(error)
-            }
-        })()
-    }, [])
 
+    loading && <p>Loading...</p>
+    
     return (
         <div className='d-flex flex-column justify-content-cneter align-items-center'>
             <NavBarComponent />
