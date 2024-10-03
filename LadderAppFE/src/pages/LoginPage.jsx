@@ -10,6 +10,7 @@ import ErrorAtom from '../atoms/ErrorAtom';
 const LoginPage = () => {
     const { register, handleSubmit } = useForm();
     const [serverError, setServerError] = useState();
+    
     const logInUser = async(formData) => {
         setServerError("")
         try {
@@ -28,22 +29,20 @@ const LoginPage = () => {
     }
 
   return (
-    <>
-        <div className='d-flex flex-column justify-content-center align-items-center'>
-            <LogoAtom />
-            <form onSubmit={handleSubmit(logInUser)} className='d-flex flex-column'>
-                <div className='my-5 d-flex space-between form-group flex-column justify-content-center gap-2'>
-                    <FormInputAtom id="email" formMethod={register} placeholder="Email" />
-                    <FormInputAtom id="password" formMethod={register} placeholder="Password" />
-                </div>
-                <div className='d-flex flex-column justify-content-center gap-2'>
-                    {serverError && <ErrorAtom message={serverError} />}
-                    <ButtonAtom text="log in" size="large" />
-                </div>
-            </form>
-            <FallbackAuthenticationMolecule page="login"/>
-        </div>
-    </>
+    <div className='d-flex flex-column justify-content-center align-items-center'>
+        <LogoAtom />
+        <form onSubmit={handleSubmit(logInUser)} className='d-flex flex-column'>
+            <div className='my-5 d-flex space-between form-group flex-column justify-content-center gap-2'>
+                <FormInputAtom id="email" formMethod={register} placeholder="Email" />
+                <FormInputAtom id="password" formMethod={register} placeholder="Password" />
+            </div>
+            <div className='d-flex flex-column justify-content-center gap-2'>
+                {serverError && <ErrorAtom message={serverError} />}
+                <ButtonAtom text="log in" size="large" />
+            </div>
+        </form>
+        <FallbackAuthenticationMolecule page="login"/>
+    </div>
   )
 }
 

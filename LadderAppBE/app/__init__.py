@@ -32,10 +32,11 @@ def create_app():
     app.add_url_rule('/@me', view_func=get_current_user, methods=['GET'])
 
     #rank routes
-    from app.routes.rank_routes import add_initial_rank, get_ranks
+    from app.routes.rank_routes import add_initial_rank, get_ranks, get_ranks_for_user
 
     app.add_url_rule('/add_initial_rank', view_func=add_initial_rank, methods=['POST'])
     app.add_url_rule('/ranks', view_func=get_ranks, methods=['GET'])
+    app.add_url_rule('/ranks_for_user', view_func=get_ranks_for_user, methods=['GET'])
     
     #match routes
     from app.routes.match_routes import add_match

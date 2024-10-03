@@ -58,5 +58,6 @@ def get_current_user_controller():
 
     return jsonify({
         "id": user.id,
-        "email": user.email
+        "email": user.email,
+        "name": f"{user.firstName} {user.lastName}"
     })

@@ -1,17 +1,13 @@
 import React, {useState, useEffect } from 'react'
 import httpClient from "../httpClient"
-import LoggedInUser from '../components/LoggedInUserComponent'
 import AuthenicationComponent from '../components/AuthenicationComponent'
 import LogoAtom from '../atoms/LogoAtom'
+import { Navigate } from 'react-router-dom'
 
 const LandingPage = () => {
     const [user, setUser] = useState("")
-
-    const logoutUser = async () => {
-        const resp = await httpClient.post("//localhost:5000/logout")
-        window.location.href = "/"
-    }
     
+    // get user info
     useEffect(() => {
         (async () => {
             try {
@@ -24,11 +20,11 @@ const LandingPage = () => {
     }, [])
 
     return (
+        
         <div className='d-flex flex-column justify-content-center align-items-center'>
             <LogoAtom />
             {user ? (
-                // probably change to a home page redirect
-                <LoggedInUser user={user} onLogout={logoutUser} />
+                <Navigate to='/home' />
 
             ) : (
                 <AuthenicationComponent />

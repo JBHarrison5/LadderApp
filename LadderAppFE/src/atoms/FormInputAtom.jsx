@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormInputAtom = ({ id, formMethod, placeholder, type, errors }) => {
+const FormInputAtom = ({ id, formMethod, placeholder, type }) => {
 
     let required = {}
     if (type == "name") {
@@ -20,17 +20,22 @@ const FormInputAtom = ({ id, formMethod, placeholder, type, errors }) => {
 
             }
         }
+    } else if (type == "score") {
+        required = {
+            required: "Score is Required",
+            validate: {
+                matchPattern: (v) => /^(?:\d{2}-\d{2} \d{2}-\d{2}|(?:\d{2}-\d{2} \d{2}-\d{2} \d{2}-\d{2}))$/.test(v) || "Score must be in the format 'xx-yy xx-yy xx-yy'"
+            }
+        }
     }
 
     return (
-        <>
-            <input 
-                id={id}
-                {...formMethod(id, required)}
-                placeholder={placeholder}
-                className='text-center fs-6 form-control text-primary'
-            />
-        </>
+        <input 
+            id={id}
+            {...formMethod(id, required)}
+            placeholder={placeholder}
+            className='text-center fs-6 form-control text-primary'
+        />
     )
 }
 

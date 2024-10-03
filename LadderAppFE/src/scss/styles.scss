@@ -1,8 +1,12 @@
 $primary: #ff2254;
+$secondary: #fa88a3;
 
 @import "bootstrap/scss/bootstrap";
 
 
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
 
 .app-background {
     background-image: linear-gradient(#000000, #8e8e8e);
@@ -26,12 +30,35 @@ button {
     height: 60%;
 }
 
+.small-logo {
+    width: 30%;
+    height: 30%;
+}
+
 .form-control {
     background: transparent;
-    border-color: $primary
+    border-color: $primary;
 }
 
 .form-control::placeholder {
+    color: $primary;
+    opacity: 0.6;
+    background: transparent;
+}
+
+.form-select {
+    background: transparent;
+    border-color: $primary;
+    color: $primary;
+    appearance: none; /* Removes the default arrow */
+    padding-right: 2.5rem; /* Ensure space for custom arrow */
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23ff2254" class="bi bi-chevron-down" viewBox="0 0 16 16"%3E%3Cpath fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"%3E%3C/path%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+}
+
+.form-select::placeholder {
     color: $primary;
     opacity: 0.6;
     background: transparent;

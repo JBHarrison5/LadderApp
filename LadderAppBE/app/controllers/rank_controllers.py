@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, session
 from sqlalchemy import func
 from datetime import datetime
 from app.models import db, User, Rank
@@ -28,7 +28,6 @@ def add_initial_rank_controller(request):
     })
 
 def swap_ranks(player_1, player_2, winner):
-
     if winner == player_1:
         winner_rank_object = Rank.query.filter_by(player_id=player_1, is_current_rank=True).first()
         loser_rank_object = Rank.query.filter_by(player_id=player_2, is_current_rank=True).first()
@@ -40,8 +39,7 @@ def swap_ranks(player_1, player_2, winner):
         raise ValueError("One or both players do not have an current rank")
 
     winner_old_rank, loser_old_rank = winner_rank_object.rank, loser_rank_object.rank
-
-    if winner_old_rank < loser_old_rank:
+    if winner_old_rank > loser_old_rank:
         for rank_obj in (winner_rank_object, loser_rank_object):
             rank_obj.is_current_rank = False
             rank_obj.date_changed = datetime.utcnow()
@@ -61,14 +59,44 @@ def swap_ranks(player_1, player_2, winner):
 
 
 def get_ranks_controller():
+
     ranks = [] 
 
     for rank in Rank.query.filter_by(is_current_rank=True).order_by(Rank.rank):
         person = {
             "player" : rank.user.firstName,
-            "rank": rank.rank
+            "rank": rank.rank,
+            "id": rank.user.id
         }
         ranks.append(person)
 
     return jsonify(ranks)
+
         
+def get_ranks_for_user_controller():
+
+    user_id = session.get("user_id")
+
+    player_rank = Rank.query.filter_by(is_current_rank=True, player_id=user_id).first()
+
+    if player_rank:
+
+        # ranks_to_check=[player_rank.rank-5...player_rank.rank+5]
+        ranks = Rank.query.filter(Rank.is_current_rank==True).filter(Rank.rank < player_rank.rank+6).filter(Rank.rank > player_rank.rank-6).order_by(Rank.rank)
+        
+        formatted_ranks = [] 
+
+        for rank in ranks:
+            person = {
+                "player" : f"{rank.user.firstName} {rank.user.lastName}",
+                "rank": rank.rank,
+                "id": rank.user.id
+            }
+            formatted_ranks.append(person)
+
+
+        return jsonify(formatted_ranks)
+
+
+    else:
+        return jsonify({"error": "User does not have a rank"}), 409
