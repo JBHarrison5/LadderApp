@@ -23,9 +23,6 @@ const NavBarComponent = () => {
                         <a className="text-white text-decoration-none" aria-current="page" href="/home">HOME</a>
                     </button>
                     <button className="nav-item w-50 text-center btn btn-outline-light m-0">
-                        <a className="text-white text-decoration-none" aria-current="page" href="/profile">PROFILE</a>
-                    </button>
-                    <button className="nav-item w-50 text-center btn btn-outline-light m-0">
                         <a className="text-white text-nowrap text-decoration-none" aria-current="page" href="/add_match">ADD MATCH</a>
                     </button>
                     <button className="nav-item w-50 text-center btn btn-outline-light m-0">

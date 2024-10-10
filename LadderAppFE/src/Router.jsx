@@ -3,7 +3,6 @@ import LandingPage from "./pages/LandingPage"
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import HomePage from "./pages/HomePage"
-import ProfilePage from "./pages/ProfilePage"
 import AddMatchPage from "./pages/AddMatchPage"
 import FullTablePage from "./pages/FullTablePage"
 import { RanksProvider } from "./context/RanksContext"
@@ -18,7 +17,6 @@ const Router = () => {
                         <Route path="/login" element={<LoginPage />}/>
                         <Route path="/register" element={<RegisterPage />}/>
                         <Route path="/" element={<LandingPage />}/>
-                        <Route path="/profile" element={<ProfilePage />}/>
                         <Route path="/table" element={<FullTablePage />}/>
                         <Route path="/home" element={<HomePage />}/>
                         <Route path="/add_match" element={<AddMatchPage />}/>
