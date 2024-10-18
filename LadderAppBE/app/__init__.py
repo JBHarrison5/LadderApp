@@ -44,9 +44,10 @@ def create_app():
     app.add_url_rule('/add_match', view_func=add_match, methods=['POST'])
 
     #challenge routes
-    from app.routes.challenge_routes import add_challenge
+    from app.routes.challenge_routes import add_challenge, challenge_reply
 
     app.add_url_rule('/add_challenge', view_func=add_challenge, methods=['POST'])
+    app.add_url_rule('/challenge_reply', view_func=challenge_reply, methods=["POST"])
      
     with app.app_context():
         db.create_all()
