@@ -10,7 +10,7 @@ def add_match_controller(request):
     player_2_id = request.json["player_2_id"]
     winner = request.json["winner"]
     score = request.json["score"]
-    date = datetime.strptime(request.json["date"], '%d/%m/%Y')
+    date = datetime.strptime(request.json["match_date"], '%d/%m/%Y %H:%M')
 
     players_exist = User.query.filter(User.id.in_([player_1_id, player_2_id])).all()
 

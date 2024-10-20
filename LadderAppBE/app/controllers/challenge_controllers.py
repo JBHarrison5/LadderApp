@@ -6,8 +6,8 @@ from app.models import db, User, Challenge
 def add_challenge_controller(request):
     challenger_id = request.json["challenger_id"]
     challengee_id = request.json["challengee_id"]
-    match_date_1 = datetime.strptime(request.json["match_date_1"], '%d/%m/%Y')
-    match_date_2 = datetime.strptime(request.json["match_date_2"], '%d/%m/%Y')
+    match_date_1 = datetime.strptime(request.json["match_date_1"], '%d/%m/%Y %H:%M')
+    match_date_2 = datetime.strptime(request.json["match_date_2"], '%d/%m/%Y %H:%M')
 
     players_exist = User.query.filter(User.id.in_([challenger_id, challengee_id])).all()
 
